@@ -1,6 +1,6 @@
 const data = {
     profile: {
-        name: "Phatthanaphon",
+        name: "พัฒนพล สุธรรม",
         avatar: "./images/profile.jpg"
     },
     stack: [
@@ -22,24 +22,62 @@ const data = {
     ],
     projects: [
         {
-            title: "Smart Home",
-            desc: "ระบบควบคุมบ้านผ่าน Home Assistant",
-            tags: ["IoT", "HomeAssistant", "ESP32"],
-            links: { github: "https://ha.singto1597.xyz", demo: null },
-            image: "https://connextsystem.com/wp-content/uploads/2024/08/home-assistant.jpg"
+            title: "Money Management Program",
+            desc: "โปรแกรมจัดการเงินสำหรับบุคคลธรรมดา",
+            tags: ["Money", "Python", "Program"],
+            links: { github: "https://github.com/singto1597/Money-Management", demo: null },
+            image: "https://www.accconsultingservice.com/wp-content/uploads/2021/02/image2-1536x864.jpg"
         },
         {
-            title: "Private Home Storage",
-            desc: "ระบบเก็บไฟล์ส่วนตัวด้วย FileBrowser",
-            tags: ["IoT", "FileBrowser", "NAS"],
-            links: { github: "https://files.singto1597.xyz", demo: null },
-            image: "https://pengwin.ca/assets/file_browser.webp"
+            title: "SyncLight Robobloq Linux Driver 🐧",
+            desc: "โปรแกรมสั่งการไฟของ Synclight บน Linux",
+            tags: ["Light", "Python", "Driver"],
+            links: { github: "https://github.com/singto1597/syncLight-Robobloq-Linux", demo: null },
+            image: "https://quiklight.robobloq.com/images/download/main_img.png"
+        },
+        {
+            title: "School Public Relations",
+            desc: "ระบบแจ้งเตือนตารางเรียน และการประกาศของโรงเรียน",
+            tags: ["System", "Python", "School"],
+            links: { github: "https://github.com/singto1597/school-public-relations", demo: null },
+            image: "https://wearecsg.com/wp-content/uploads/2022/11/CSG_Blog_PR_for_School_Districts_Opt1.jpg"
+        },
+        {
+            title: "ระบบเลี้ยงกุ้งฝอย IoT",
+            desc: "ระบบเลี้ยงกุ้งฝอยอัตโนมัติด้วย ESP32",
+            tags: ["Shrimp farming", "C++", "School Project", "IoT", "Arduino"],
+            links: { github: "https://github.com/singto1597/Shrimp-farming-system_IOT", demo: null },
+            image: "https://raw.githubusercontent.com/singto1597/Shrimp-farming-system_IOT/refs/heads/main/IMG_20250130_135806.jpg"
+        },
+        {
+            title: "Robot",
+            desc: "โค้ดหุ่นยนต์แต่ละประเภทสำหรับแข่ง",
+            tags: ["Robot", "C++", "School Project", "INEX", "Arduino"],
+            links: { github: "https://github.com/singto1597/piriyalai-robot", demo: null },
+            image: "./images/robot.jpg"
         }
     ],
     socials: [
         { name: "GitHub", url: "https://github.com/singto1597/", icon: "github" },
         { name: "LinkedIn", url: "https://www.instagram.com/xphat.z/", icon: "instagram" },
         { name: "Email", url: "singto1597@gmail.com", icon: "mail" }
+    ],
+    services: [
+        {
+            name: "Smart Home",
+            desc: "ระบบควบคุมบ้านผ่าน Home Assistant",
+            icon: "",
+            url: "https://ha.singto1597.xyz",
+            status: "online" 
+        },
+        {
+            name: "Private Home Storage",
+            desc: "ระบบเก็บไฟล์ส่วนตัวด้วย FileBrowser",
+            icon: "",
+            url: "https://files.singto1597.xyz",
+            status: "online" 
+        }
+        
     ]
 };
 
@@ -48,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderStack();
     renderProjects();
     renderSocials();
+    renderServices();
     document.getElementById('year').innerText = new Date().getFullYear();
 
     lucide.createIcons();
@@ -112,7 +151,31 @@ function renderProjects() {
         </div>
     `).join('');
 }
+function renderServices() {
+    const container = document.getElementById('services-container');
+    
+    // เช็คก่อนว่ามี element นี้ไหม (กัน error)
+    if (!container) return;
 
+    container.innerHTML = data.services.map(service => `
+        <a href="${service.url}" target="_blank" class="group relative bg-cardDark hover:bg-slate-700 border border-slate-700 p-4 rounded-xl transition-all hover:-translate-y-1 hover:shadow-lg hover:shadow-accent/20 flex flex-col items-center text-center gap-3">
+            
+            <!-- Status Dot -->
+            <div class="absolute top-3 right-3 w-2 h-2 rounded-full ${service.status === 'online' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]' : 'bg-red-500'}"></div>
+            
+            <!-- Icon -->
+            <div class="p-3 rounded-full bg-slate-800 group-hover:bg-accent group-hover:text-bgDark text-accent transition-colors duration-300">
+                <i data-lucide="${service.icon}" class="w-6 h-6"></i>
+            </div>
+            
+            <!-- Text -->
+            <div>
+                <h3 class="font-bold text-white text-sm group-hover:text-accent transition-colors">${service.name}</h3>
+                <p class="text-xs text-textMuted mt-1">${service.desc}</p>
+            </div>
+        </a>
+    `).join('');
+}
 function renderSocials() {
     const container = document.getElementById('socials-container');
     container.innerHTML = data.socials.map(social => `
