@@ -31,7 +31,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
 
     <link rel="stylesheet" href="style.css">
 
@@ -139,6 +139,27 @@
             </div>
         </section>
 
+        <section id="certificates" class="mb-32">
+            <div class="flex items-center gap-4 mb-10">
+                <div class="h-px flex-1 bg-slate-800"></div>
+                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+                    <i data-lucide="award" class="text-accent"></i> Certificates
+                </h2>
+                <div class="h-px flex-1 bg-slate-800"></div>
+            </div>
+            
+            <div id="certs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            </div>
+        </section>
+
+        <section id="youtube" class="mb-32">
+            <h2 class="text-3xl font-bold text-white mb-8 text-center md:text-left">
+                Content & <span class="text-red-500">YouTube</span>
+            </h2>
+            
+            <div id="youtube-container"></div>
+        </section>
+
         <footer id="contact" class="border-t border-slate-800 pt-16 pb-8 text-center">
             <h2 class="text-3xl font-bold text-white mb-6">Let's Connect</h2>
             <p class="text-textMuted mb-8">
@@ -153,6 +174,15 @@
         </footer>
 
     </main>
+
+    <div id="image-modal" class="fixed inset-0 z-[100] bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm cursor-zoom-out" onclick="closeImage()">
+        <button class="absolute top-5 right-5 text-slate-400 hover:text-white transition transform hover:rotate-90">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+        
+        <img id="modal-img" src="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border border-slate-700" onclick="event.stopPropagation()">
+    </div>
+
     <script src="script.js"></script>
 
 </body>
