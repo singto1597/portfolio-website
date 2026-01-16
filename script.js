@@ -20,6 +20,28 @@ const data = {
             skills: ["Docker", "Linux", "Git", "Nginx"] 
         }
     ],
+    journey: [
+        {
+            question: "จุดเริ่มต้น? ทำไมถึงมาเขียนโค้ด",
+            answer: "ผมเริ่มจาก <span class='text-accent font-bold'>ภาษา C</span> เลยครับ ตอนนั้นเห็นว่า ม.2 จะได้เรียนก็เลยไปศึกษาดูก่อน เริ่มจากการถาม <b class='text-white'>AI และ Youtube (อาจารย์ KongRaksiam)</b> ไม่มีครู ไม่มีใครสอน <b class='text-white'>ทำไปเรื่อยๆ เพราะชอบครับ</b> พอทำโปรแกรมเล็กๆ ได้ มันเริ่มรู้สึกว่าแค่อย่างเดียวไม่อาจจะไม่พอ ก็เลยเริ่มขยับไป <span class='text-accent'>C++</span> พอไป C++ แล้วก็รู้สึกอยากทำระบบที่ใช้ได้จริงๆ แต่ถ้าใช้ C++ เขียนน่าจะตายแน่ๆ เลยไปต่อที่ <span class='text-accent'>Python</span> และ <span class='text-accent'>SQL</span> จนถึงทุกวันนี้ครับ",
+            icon: "lightbulb"
+        },
+        {
+            question: "แบ่งเวลาเรียนกับเขียนโค้ดยังไง?",
+            answer: "ผมยึดหลัก <b class='text-white'>'เรียนคือหน้าที่ โค้ดคือความชอบ'</b> ช่วงสอบจะโฟกัสเรียนเต็มที่ครับ แต่พอเข้าใจบทเรียนแล้วก็จะหาอะไรทำครับ ส่วนช่วงว่างหรือวันหยุดผมจะชอบหาอะไรเล็กๆน้อยๆทำ เพราะไอเดียมันชอบมาเรื่อยๆเลยครับ ไม่ว่าจะระบบ หรืออะไรที่ทำแล้วช่วยให้ชีวิตสบายขึ้นก็ลองทำๆไป <b class='text-white'>การเขียนโค้ดช่วยฝึก Logic ซึ่งส่งผลดีต่อวิชาคำนวณด้วยครับ</b>",
+            icon: "clock"
+        },
+        {
+            question: "คำแนะนำสำหรับคนอยากเริ่ม?",
+            answer: "อย่ากลัว Error เพราะ <b class='text-white'>Error คือครูที่ดีที่สุด</b> อย่ากลัวว่าจะทำไม่ได้ อย่ากลัวว่าจะยาก แค่ลองทำดู จะรู้ว่ายากจริง เอ้ย ก็ถูก พอมันยากเราก็ยิ่งอยากเรียนรู้ครับ แนะนำเริ่มจากภาษาที่อ่านง่ายอย่าง <span class='text-accent'>Python</span> แล้วลองทำ <b class='text-white'>โปรเจกต์เล็กๆ ที่ใช้งานได้จริง</b> เช่น โปรแกรมคำนวณเงิน หรือ To-do list แล้วจะสนุกครับ <b class='text-white'>ยิ่งเจอบัค ยิ่งปวดหัว ยิ่งสนุกครับ</b>",
+            icon: "rocket"
+        },
+        {
+            question: "เป้าหมายในอนาคต",
+            answer: "จริงๆ ผมถนัดคอมนะครับ แต่รู้สึกว่าถ้าไปสายคอมเลย โอกาสไปเรียนรู้สายอื่นจะยาก ผมเลยเลือกไปทาง <span class='text-accent font-bold'>ไฟฟ้า</span> เป็นสายหลักครับ เพราะ ก็อยากให้มันมีความรู้พื้นก่อน แล้วเราจะไปเก็บอะไรต่อ มันก็จะง่ายแล้วครับเพราะเรามีพื้นฐานต่างๆมาเยอะมากๆแล้ว ในความคิดผมคือ <b class='text-white'>คอมและโค้ดเราศึกษาเมื่อไหร่ก็ได้ แต่ไฟฟ้าเราสามารถเอาความรู้ไปต่อยอดร่วมกับคอมพิวเตอร์ได้กว้างกว่าครับ</b>",
+            icon: "target"
+        }
+    ],
     projects: [
         {
             title: "Money Management Program",
@@ -114,6 +136,7 @@ const data = {
 document.addEventListener('DOMContentLoaded', () => {
     renderProfile();
     renderStack();
+    renderJourney();
     renderProjects();
     renderServices();
     renderCertificates(); 
@@ -310,4 +333,25 @@ function renderYoutube() {
             </div>
         </div>
     `;
+}
+
+function renderJourney() {
+    const container = document.getElementById('journey-container');
+    if(!container) return;
+
+    container.innerHTML = data.journey.map(item => `
+        <div class="bg-cardDark p-6 rounded-xl border border-slate-700/50 hover:border-accent/30 transition-all duration-300 hover:shadow-lg flex flex-col gap-4 group">
+            <div class="flex items-center gap-4">
+                <div class="p-3 bg-slate-800 rounded-lg text-accent group-hover:bg-accent group-hover:text-bgDark transition-colors">
+                    <i data-lucide="${item.icon}" class="w-6 h-6"></i>
+                </div>
+                <h3 class="font-bold text-white text-lg group-hover:text-accent transition-colors">
+                    ${item.question}
+                </h3>
+            </div>
+            <p class="text-textMuted text-sm leading-relaxed pl-[3.25rem]">
+                "${item.answer}"
+            </p>
+        </div>
+    `).join('');
 }
