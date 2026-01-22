@@ -129,6 +129,13 @@ const data = {
             icon: "hard-drive",
             url: "https://files.singto1597.xyz",
             status: "online" 
+        },
+        {
+            name: "Contest Management System",
+            desc: "ระบบแข่งเขียนโปรแกรมที่นำมารันบนเครื่อง",
+            icon: "bulb",
+            url: "https://cms.singto1597.xyz",
+            status: "online" 
         }
     ]
 };
