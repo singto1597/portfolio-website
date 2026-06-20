@@ -205,6 +205,13 @@ const data = {
 
     services: [
         {
+            name: "Classroom Management System",
+            desc: "ระบบจัดการห้องเรียน ไม่ว่าจะเป็น การบ้าน เงินห้อง และนักเรียน",
+            icon: "school",
+            url: "https://class.singto1597.xyz",
+            status: "online" 
+        },
+        {
             name: "Smart Home",
             desc: "ระบบควบคุมบ้านผ่าน Home Assistant",
             icon: "home",
