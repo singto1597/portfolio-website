@@ -63,7 +63,7 @@ const data = {
                 "Microservices"
             ],
             links: { 
-                "github": "https://github.com/singto1597/classroom-deployment", 
+                "github": "https://github.com/singto1597/classroom-management", 
                 "demo": null 
             },
             image: "./images/projects/classroom-arch.png"
