@@ -79,7 +79,7 @@ const data = {
             image: "./images/projects/robot.jpg"
         }
     ],
-    certificates = [
+    certificates: [
         // --- หมวด: โอลิมปิกวิชาการและวิศวกรรมซอฟต์แวร์ (ตัวตึงสุด เอาไว้บนๆ) ---
         {
             title: "ผ่านการคัดเลือกเข้าค่าย 2 สอวน. วิชาคอมพิวเตอร์",
