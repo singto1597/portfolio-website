@@ -79,26 +79,89 @@ const data = {
             image: "./images/projects/robot.jpg"
         }
     ],
-    certificates: [
+    certificates = [
+        // --- หมวด: โอลิมปิกวิชาการและวิศวกรรมซอฟต์แวร์ (ตัวตึงสุด เอาไว้บนๆ) ---
         {
-            title: "โครงการศูนย์โอลิมปิกวิชาการ ค่าย 1 สอวน.",
+            title: "ผ่านการคัดเลือกเข้าค่าย 2 สอวน. วิชาคอมพิวเตอร์",
+            issuer: "มหาวิทยาลัยเชียงใหม่",
+            date: "พ.ศ. 2568", // ปรับวันที่ให้ตรงกับใบประกาศจริง
+            image: "./images/certificates/POSN_2_CMU.png",
+            link: "#" // ใส่ลิงก์ PDF หรือภาพ
+        },
+        {
+            title: "โครงการศูนย์โอลิมปิกวิชาการ ค่าย 1 สอวน. วิชาคอมพิวเตอร์",
             issuer: "ยุพราชวิทยาลัย",
-            date: "วันเสาร์ที่ 18 ตุลาคม พ.ศ.2568",
+            date: "วันเสาร์ที่ 18 ตุลาคม พ.ศ. 2568",
             image: "./images/certificates/POSN_1.png",
             link: "https://drive.google.com/file/d/1s_Tx0DbpmSMfzl4Ilu6_s5QOp8TCPlsS/view?usp=drive_link"
         },
+        
+        // --- หมวด: หุ่นยนต์และนวัตกรรม IoT (โชว์ความสามารถด้านฮาร์ดแวร์และการแก้ปัญหา) ---
         {
-            title: "การสอบวัดความสามารถทางวิทยาศาสตร์",
+            title: "รางวัลเหรียญทอง การแข่งขันหุ่นยนต์วิ่งเร็ว ม.1-ม.3 ระดับประเทศ",
+            issuer: "รายการ 46ict ณ โรงเรียนสตรีภูเก็ตวิทยาลัย",
+            date: "พ.ศ. 2568", // ปรับวันที่ให้ตรงกับใบประกาศจริง
+            image: "./images/certificates/46ict_Robot.png",
+            link: "#"
+        },
+        {
+            title: "รางวัลเหรียญทอง ชนะเลิศ การแข่งขันหุ่นยนต์ระดับสูง ม.1-ม.3",
+            issuer: "โครงการแข่งขันศิลปหัตถกรรมนักเรียน",
+            date: "วันอังคารที่ 26 สิงหาคม พ.ศ. 2568",
+            image: "./images/certificates/Robot_Craft.png",
+            link: "#"
+        },
+        {
+            title: "นำเสนอโครงงานนวัตกรรม: ระบบเลี้ยงกุ้งฝอย IoT",
+            issuer: "งานเปิดบ้านวิชาการ โรงเรียนพิริยาลัยจังหวัดแพร่",
+            date: "พ.ศ. 2567",
+            image: "./images/certificates/IoT_Shrimp.png",
+            link: "#"
+        },
+        {
+            title: "รางวัลรองชนะเลิศอันดับที่ 2 การแข่งขันหุ่นยนต์ Maejo Phare Robot Challenge",
+            issuer: "มหาวิทยาลัยแม่โจ้-แพร่ เฉลิมพระเกียรติ",
+            date: "วันพุธที่ 13 สิงหาคม พ.ศ. 2568",
+            image: "./images/certificates/Maejo_Robot.png",
+            link: "#"
+        },
+
+        // --- หมวด: โครงงานและวิชาการระดับประเทศ (โชว์กระบวนการคิดแบบ STEM) ---
+        {
+            title: "รางวัลความคิดสร้างสรรค์ดีเด่น โครงงาน Thailand STEM Project Competition 2025",
+            issuer: "โรงเรียนชลประทานวิทยา",
+            date: "วันเสาร์ที่ 6 กันยายน พ.ศ. 2568",
+            image: "./images/certificates/STEM_Project.png",
+            link: "#"
+        },
+        {
+            title: "รางวัลเหรียญทองแดง การแข่งขันคณิตศาสตร์ประเทศไทย ครั้งที่ 13 (TMC)",
+            issuer: "Thailand Mathematics Contest",
+            date: "ปีการศึกษา 2567",
+            image: "./images/certificates/TMC_13.png",
+            link: "#"
+        },
+
+        // --- หมวด: ผลการเรียนและวิชาการในโรงเรียน (ยืนยันความรู้พื้นฐานที่แน่นปึ้ก) ---
+        {
+            title: "การสอบวัดความสามารถทางวิทยาศาสตร์ (เหรียญทองอันดับ 4)",
             issuer: "พิริยาลัยจังหวัดแพร่",
-            date: "วันเสาร์ที่ 11 มกราคม พ.ศ.2569",
-            image: "./images/certificates/Science_Piriyalai.png",
+            date: "วันอาทิตย์ที่ 18 มกราคม พ.ศ. 2569", // ปรับเป็น 18 มกราคม ตามปฏิทินจริงของปี 2569 หรือใช้วันที่ตามเกียรติบัตร
+            image: "./images/certificates/Science_Piriyalai_69.png",
             link: "https://kruchitchai.com/cert/export.php?module=certificate-export&type=pdf&id=94944"
+        },
+        {
+            title: "ผู้ทำคะแนนสูงสุดรายวิชา การโปรแกรม 3 และ วิทยาการคำนวณ 2",
+            issuer: "พิริยาลัยจังหวัดแพร่",
+            date: "วันศุกร์ที่ 29 พฤศจิกายน พ.ศ. 2567",
+            image: "./images/certificates/Top_Score_CS.png",
+            link: "#"
         }
     ],
 
     youtube: {
         channelName: "พัฒนพล สุธรรม",
-        subscribers: "525",
+        subscribers: "562",
         desc: "แชร์ความรู้เรื่องการเขียน Program และเรื่องอุปกรณ์ไฟฟ้าต่างๆ",
         avatar: "./images/profiles/profile.jpg",
         channelUrl: "https://www.youtube.com/@PhatthanaphonSutham",
@@ -111,7 +174,7 @@ const data = {
     
     socials: [
         { name: "GitHub", url: "https://github.com/singto1597/", icon: "github" },
-        { name: "LinkedIn", url: "https://www.instagram.com/xphat.z/", icon: "instagram" },
+        { name: "Instagram", url: "https://www.instagram.com/xphat.z/", icon: "instagram" },
         { name: "Email", url: "singto1597@gmail.com", icon: "mail" }
     ],
 
