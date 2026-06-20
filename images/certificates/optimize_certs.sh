@@ -2,7 +2,7 @@
 
 # ============================================================
 #  optimize_certs.sh
-#  ดึงรูปต้นฉบับจากโฟลเดอร์ org/ มาลดขนาด แปลงเป็น PNG และเปลี่ยนชื่อ
+#  ดึงรูปต้นฉบับจากโฟลเดอร์ org/ มาหมุนให้ตรง, ลดขนาด, แปลงเป็น PNG
 # ============================================================
 
 set -euo pipefail
@@ -10,13 +10,11 @@ set -euo pipefail
 SRC_DIR="org"
 DEST_DIR="."
 
-# เช็คว่ามี ImageMagick ให้ใช้งานมั้ย
 if ! command -v convert >/dev/null 2>&1 && ! command -v magick >/dev/null 2>&1; then
-    echo "❌ ไม่พบ ImageMagick กรุณาติดตั้งก่อน: sudo apt install imagemagick"
+    echo "❌ ไม่พบ ImageMagick"
     exit 1
 fi
 
-# Map ชื่อไฟล์จากต้นฉบับ -> ชื่อใหม่ (บังคับให้เป็น .png)
 declare -A MAP=(
   ["posn-camp1-68.png"]="POSN_1.png"
   ["015.jpg"]="Robot_Craft.png"
@@ -29,7 +27,7 @@ declare -A MAP=(
   ["Screenshot from 2026-03-05 22-43-48.png"]="46ict_Robot.png"
 )
 
-echo "🚀 เริ่มบีบอัดและแปลงไฟล์..."
+echo "🚀 เริ่มจัดทรงและบีบอัดไฟล์..."
 
 for src in "${!MAP[@]}"; do
   dst="${MAP[$src]}"
@@ -41,16 +39,14 @@ for src in "${!MAP[@]}"; do
     continue
   fi
 
-  echo "⚙️  กำลังแปลง: $src -> $dst"
+  echo "⚙️  กำลังจัดการ: $src -> $dst"
   
-  # ตั้งค่าคำสั่ง:
-  # -resize '1200>' : ย่อรูปให้ด้านที่ยาวที่สุดไม่เกิน 1200px (ถ้ารูปเล็กกว่า 1200px อยู่แล้วจะไม่ขยาย)
-  # -strip          : ลบข้อมูล EXIF/Metadata ทิ้งเพื่อรีดขนาดไฟล์
+  # เพิ่ม -auto-orient เข้าไปก่อน -resize
   if command -v magick >/dev/null 2>&1; then
-      magick "$src_path" -resize '1200>' -strip "$dst_path"
+      magick "$src_path" -auto-orient -resize '1200>' -strip "$dst_path"
   else
-      convert "$src_path" -resize '1200>' -strip "$dst_path"
+      convert "$src_path" -auto-orient -resize '1200>' -strip "$dst_path"
   fi
 done
 
-echo "✅ เรียบร้อย! ไฟล์พร้อมเอาขึ้นเว็บแล้วครับ"
+echo "✅ เรียบร้อย! รูปตั้งตรงพร้อมขึ้นเว็บแล้วครับ"
