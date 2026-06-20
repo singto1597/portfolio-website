@@ -7,17 +7,22 @@ const data = {
         { 
             title: "Languages", 
             icon: "code-2", 
-            skills: ["C | C++", "Python", "Html", "CSS", "JavaScript", "SQL"] 
+            skills: ["C/C++", "Python", "PHP", "Bash/Shell", "HTML", "CSS", "JavaScript", "TypeScript", "SQL"] 
         },
         { 
-            title: "Backend Frameworks", 
+            title: "Backend & Databases", 
             icon: "server", 
-            skills: ["Flask"] 
+            skills: ["FastAPI", "Flask", "PostgreSQL", "MySQL"] 
         },
         { 
-            title: "DevOps & Tools", 
+            title: "DevOps, Infra & Tools", 
             icon: "container", 
-            skills: ["Docker", "Linux", "Git", "Nginx"] 
+            skills: ["Docker", "Proxmox", "Linux (Ubuntu/Mint)", "Git", "Nginx", "Cloudflare Tunnels"] 
+        },
+        {
+            title: "Hardware & Electronics",
+            icon: "cpu",
+            skills: ["Networks", "Server", "Electrics && Electronics", "ESP32", "Arduino", "Raspberry Pi"]
         }
     ],
     journey: [
@@ -43,6 +48,26 @@ const data = {
         }
     ],
     projects: [
+        {
+            title: "Classroom Management System",
+            desc: "ระบบบริหารจัดการห้องเรียนแบบครบวงจรด้วยสถาปัตยกรรม Microservices ประกอบด้วยระบบจัดการหลังบ้าน (FastAPI), หน้าเว็บสำหรับผู้ใช้ (Vue.js + TypeScript) และ Discord Bot (Python) สำหรับการแจ้งเตือนแบบเรียลไทม์ รองรับระบบจัดการภาระงาน, ตารางเรียน, การเงิน และระบบ Role-Based Access Control (RBAC) จัดการ Infrastructure ทั้งหมดผ่าน Docker Compose เพื่อความสะดวกในการ Deploy และสเกลระบบ",
+            tags: [
+                "Vue.js", 
+                "TypeScript", 
+                "FastAPI", 
+                "Python", 
+                "Discord.py",
+                "PostgreSQL",
+                "Redis",
+                "Docker", 
+                "Microservices"
+            ],
+            links: { 
+                "github": "https://github.com/singto1597/classroom-deployment", 
+                "demo": null 
+            },
+            image: "./images/projects/classroom-arch.png"
+        },
         {
             title: "Money Management Program",
             desc: "โปรแกรมจัดการเงินสำหรับบุคคลธรรมดา",
