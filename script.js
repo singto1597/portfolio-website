@@ -111,13 +111,13 @@ const data = {
             image: "./images/certificates/Robot_Craft.png",
             link: "#"
         },
-        {
-            title: "นำเสนอโครงงานนวัตกรรม: ระบบเลี้ยงกุ้งฝอย IoT",
-            issuer: "งานเปิดบ้านวิชาการ โรงเรียนพิริยาลัยจังหวัดแพร่",
-            date: "พ.ศ. 2567",
-            image: "./images/certificates/IoT_Shrimp.png",
-            link: "#"
-        },
+        // {
+        //     title: "นำเสนอโครงงานนวัตกรรม: ระบบเลี้ยงกุ้งฝอย IoT",
+        //     issuer: "งานเปิดบ้านวิชาการ โรงเรียนพิริยาลัยจังหวัดแพร่",
+        //     date: "พ.ศ. 2567",
+        //     image: "./images/certificates/IoT_Shrimp.png",
+        //     link: "#"
+        // },
         {
             title: "รางวัลรองชนะเลิศอันดับที่ 2 การแข่งขันหุ่นยนต์ Maejo Phare Robot Challenge",
             issuer: "มหาวิทยาลัยแม่โจ้-แพร่ เฉลิมพระเกียรติ",
