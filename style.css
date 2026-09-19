@@ -3,6 +3,12 @@ body {
     color: #E2E8F0;
 }
 
+/* nav เป็น fixed สูง 4rem — กันไม่ให้ nav บังหัวข้อเวลาคลิกลิงก์ */
+section[id],
+footer[id] {
+    scroll-margin-top: 5.5rem;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -35,4 +41,26 @@ body {
         linear-gradient(to bottom, #1e293b 1px, transparent 1px);
     mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+}
+
+/* เคารพการตั้งค่า "ลดการเคลื่อนไหว" ของผู้ใช้ */
+@media (prefers-reduced-motion: reduce) {
+    .profile-glow {
+        animation: none;
+    }
+
+    /* ต้องมี !important เพราะ .scroll-smooth ของ Tailwind เป็น class
+       ซึ่ง specificity สูงกว่า element selector ธรรมดา */
+    html.scroll-smooth,
+    html {
+        scroll-behavior: auto !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
