@@ -1,64 +1,640 @@
+/* ============================================================
+   พัฒนพล สุธรรม — portfolio
+   ธีม: กระดาษกับหมึก
+   หลักการ: ใช้ "ตัวอักษร" สร้างลำดับชั้น ไม่ใช่สีหรือกรอบ
+            สีเน้นปรากฏได้เฉพาะกับสิ่งที่กดได้เท่านั้น
+   ============================================================ */
+
+/* ---------- 1. Tokens ---------- */
+:root {
+    /* กระดาษอุ่น ไม่ขาวจัด — ขาวจัดจะล้าตาเวลาอ่านนาน */
+    --paper:   #FBFAF7;
+    --paper-2: #F4F2EC;
+
+    /* หมึก: ดำอุ่น ไม่ดำสนิท */
+    --ink:   #1A1A17;
+    --ink-2: #4A4A43;   /* เนื้อความรอง — คอนทราสต์ 8.5:1 */
+    --ink-3: #6E6E64;   /* meta เล็ก ๆ   — คอนทราสต์ 4.9:1 (ผ่าน AA) */
+
+    --rule:   #E2DFD6;
+    --rule-2: #CFCBBE;
+
+    /* สีเน้น — ใช้กับ "สิ่งที่กดได้" เท่านั้น ห้ามใช้ประดับ */
+    --accent:     #1E40AF;
+    --accent-dim: #1E3A8A;
+
+    --live: #15803D;
+    --wip:  #B45309;
+    --old:  #6E6E64;
+
+    --serif: 'Noto Serif Thai', 'IBM Plex Sans Thai', Georgia, serif;
+    --sans:  'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --col: 43rem;        /* ความกว้างคอลัมน์อ่าน (~688px) */
+    --gutter: 1.25rem;
+    --nav-h: 3.75rem;
+
+    --ease: cubic-bezier(.2, .7, .3, 1);
+}
+
+/* ---------- 2. Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
 body {
-    background-color: #0B1120;
-    color: #E2E8F0;
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    /* ไทยมีสระบน-ล่าง ต้องโปร่งกว่าอังกฤษ (ทั่วไปใช้ 1.5) */
+    font-size: 1rem;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* nav เป็น fixed สูง 4rem — กันไม่ให้ nav บังหัวข้อเวลาคลิกลิงก์ */
-section[id],
-footer[id] {
-    scroll-margin-top: 5.5rem;
+img { display: block; max-width: 100%; height: auto; }
+
+/* ใช้ attribute hidden ควบคุมการซ่อน (เมนูมือถือ, ไอคอน) — ต้องชนะ display ของ element */
+[hidden] { display: none !important; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+h1, h2, h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    line-height: 1.35;
+    margin: 0;
+    letter-spacing: -0.01em;
 }
 
-::-webkit-scrollbar {
-    width: 10px;
-}
-::-webkit-scrollbar-track {
-    background: #0B1120;
-}
-::-webkit-scrollbar-thumb {
-    background: #334155;
-    border-radius: 5px;
-    border: 2px solid #0B1120;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: #475569;
+p { margin: 0 0 1.1em; }
+p:last-child { margin-bottom: 0; }
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
 }
 
-.profile-glow {
-    box-shadow: 0 0 40px -10px rgba(6, 182, 212, 0.3);
-    animation: pulse-glow 3s infinite;
+/* nav เป็น sticky สูง ~3.75rem — กันไม่ให้บังหัวข้อเวลากดลิงก์ */
+section[id], footer[id] { scroll-margin-top: calc(var(--nav-h) + 1.25rem); }
+
+/* ---------- 3. Layout ---------- */
+.page {
+    width: 100%;
+    max-width: var(--col);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
 }
 
-@keyframes pulse-glow {
-    0% { box-shadow: 0 0 40px -10px rgba(6, 182, 212, 0.3); }
-    50% { box-shadow: 0 0 60px -5px rgba(6, 182, 212, 0.5); }
-    100% { box-shadow: 0 0 40px -10px rgba(6, 182, 212, 0.3); }
+main { padding-bottom: 5rem; }
+
+section { margin-bottom: 4.5rem; }
+
+/* ---------- 4. Nav ---------- */
+.nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--nav-h);
+    background: rgba(251, 250, 247, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--rule);
 }
 
-.bg-grid {
-    background-size: 40px 40px;
-    background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
-        linear-gradient(to bottom, #1e293b 1px, transparent 1px);
-    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+.nav-inner {
+    max-width: var(--col);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
-/* เคารพการตั้งค่า "ลดการเคลื่อนไหว" ของผู้ใช้ */
+.nav-logo {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    color: var(--ink);
+    white-space: nowrap;
+}
+.nav-logo:hover { text-decoration: none; color: var(--accent); }
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+    font-size: 0.875rem;
+}
+
+.nav-links a { color: var(--ink-2); }
+.nav-links a:hover { color: var(--accent); text-decoration: none; }
+
+.nav-toggle {
+    display: none;
+    background: none;
+    border: 0;
+    padding: 0.5rem;
+    margin-right: -0.5rem;
+    cursor: pointer;
+    color: var(--ink);
+    line-height: 0;
+}
+.nav-toggle svg { width: 22px; height: 22px; }
+
+/* ซ่อน/แสดงด้วย attribute hidden (ดู [hidden] ด้านบน) ไม่ใช้ display:none ตรง ๆ
+   ไม่งั้นจะชนะ [hidden] แล้วเมนูไม่มีทางเปิดได้ */
+.nav-mobile {
+    position: sticky;
+    top: var(--nav-h);
+    z-index: 40;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+}
+.nav-mobile a {
+    display: block;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+}
+.nav-mobile a:last-child { border-bottom: 0; }
+.nav-mobile a:hover { color: var(--accent); text-decoration: none; }
+
+/* ---------- 5. Section head ---------- */
+/* ใช้ตัวอักษรสร้างลำดับชั้น ไม่ใช้ไอคอน */
+.section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule-2);
+    margin-bottom: 2.25rem;
+}
+
+.section-title { font-size: 1.375rem; }
+
+.section-num {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+}
+
+/* ---------- 6. Intro ---------- */
+.intro { padding-top: 3.5rem; }
+
+.intro-top {
+    display: flex;
+    align-items: center;
+    gap: 1.125rem;
+    margin-bottom: 1.75rem;
+}
+
+.intro-photo {
+    width: 5.5rem;
+    height: 5.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--rule-2);
+}
+
+.intro-name { font-size: clamp(1.5rem, 5vw, 1.875rem); }
+
+.intro-role {
+    margin: 0.25rem 0 0;
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+}
+
+.intro-body {
+    font-size: 1.0625rem;
+    color: var(--ink-2);
+    max-width: 34rem;
+}
+.intro-body strong { color: var(--ink); font-weight: 600; }
+
+.intro-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+    font-size: 0.9375rem;
+}
+
+/* ---------- 7. Feed / โพสต์ ---------- */
+.feed { display: flex; flex-direction: column; }
+
+.post {
+    padding: 2.25rem 0;
+    border-bottom: 1px solid var(--rule);
+}
+.post:first-child { padding-top: 0; }
+.post:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.post-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.post-name { font-size: 1.5rem; }
+
+.post-year {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+
+.post-sub {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 0.625rem;
+    margin: 0 0 1.125rem;
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+    white-space: nowrap;
+}
+.status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--old);
+    flex-shrink: 0;
+}
+.status-live::before { background: var(--live); }
+.status-wip::before  { background: var(--wip); }
+
+.post-story {
+    font-size: 1.0625rem;
+    color: var(--ink-2);
+    margin-bottom: 1.5rem;
+}
+.post-story strong { color: var(--ink); font-weight: 600; }
+
+.post-media {
+    display: block;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--paper-2);
+}
+.post-media img {
+    width: 100%;
+    transition: opacity 0.3s var(--ease);
+}
+.post-media:hover img { opacity: 0.9; }
+
+/* แถวปุ่ม — hairline ด้านบน เหมือนแถว Like/Comment ของโพสต์ */
+.post-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.9375rem;
+}
+
+.post-actions .primary { font-weight: 600; }
+.post-actions .quiet { color: var(--ink-3); }
+.post-actions .quiet:hover { color: var(--accent); }
+
+/* โพสต์ย่อ — รูปเล็กด้านซ้าย */
+.post-minor { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.375rem; }
+
+/* โปรเจกต์ที่ไม่มีรูป — ปล่อยให้ข้อความกว้างเต็ม ไม่เหลือช่องว่างซ้าย */
+.post-minor.no-thumb { grid-template-columns: 1fr; }
+
+.post-minor .post-name { font-size: 1.0625rem; }
+
+.post-minor .post-story {
+    font-size: 0.9375rem;
+    margin-bottom: 1rem;
+}
+
+.post-minor .post-actions {
+    border-top: 0;
+    padding-top: 0;
+    font-size: 0.875rem;
+}
+
+.post-thumb {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--paper-2);
+    aspect-ratio: 4 / 3;
+}
+.post-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ป้ายคั่นในฟีด */
+.feed-label {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    margin: 0.5rem 0 0;
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+}
+.feed-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+}
+
+/* ---------- 8. ทักษะ ---------- */
+.skills { display: flex; flex-direction: column; gap: 0; }
+
+.skill-row {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 1.25rem;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9375rem;
+}
+.skill-row:last-child { border-bottom: 0; }
+
+.skill-cat { color: var(--ink-3); font-size: 0.875rem; }
+.skill-items { color: var(--ink-2); }
+
+/* ---------- 9. ผมกับ AI ---------- */
+.ai-note {
+    font-size: 1.0625rem;
+    color: var(--ink-2);
+}
+.ai-note p + p { margin-top: 1.1em; }
+
+.ai-lede {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+}
+
+/* ---------- 10. เกี่ยวกับผม ---------- */
+.journey { display: flex; flex-direction: column; }
+
+.journey-item {
+    padding: 1.75rem 0;
+    border-bottom: 1px solid var(--rule);
+}
+.journey-item:first-child { padding-top: 0; }
+.journey-item:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.journey-q {
+    font-family: var(--serif);
+    font-size: 1.0625rem;
+    margin-bottom: 0.625rem;
+}
+
+.journey-a {
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+}
+.journey-a b, .journey-a strong { color: var(--ink); font-weight: 600; }
+.journey-a .hl { color: var(--ink); font-weight: 600; }
+
+/* ---------- 11. เกียรติบัตร — แถวเลื่อนแนวนอน ---------- */
+.rail-wrap { position: relative; }
+
+/* เงาที่ขอบขวา — สัญญาณว่าปัดดูต่อได้ */
+.rail-wrap::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 3rem;
+    pointer-events: none;
+    background: linear-gradient(to right, transparent, var(--paper));
+}
+
+.rail {
+    display: flex;
+    gap: 0.875rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rule-2) transparent;
+}
+.rail::-webkit-scrollbar { height: 6px; }
+.rail::-webkit-scrollbar-track { background: transparent; }
+.rail::-webkit-scrollbar-thumb { background: var(--rule-2); border-radius: 3px; }
+
+/* การ์ดเกียรติบัตร — ตัวการ์ดเป็น div เพราะในการ์ดมีทั้งปุ่ม (เปิดรูปใหญ่)
+   และลิงก์ออกไปข้างนอก ซึ่งซ้อนกันใน <button> เดียวไม่ได้ */
+.cert {
+    flex: 0 0 12.5rem;
+    scroll-snap-align: start;
+}
+
+.cert-img {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--paper-2);
+    aspect-ratio: 4 / 3;
+    margin-bottom: 0.625rem;
+    cursor: zoom-in;
+}
+.cert-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s var(--ease);
+}
+.cert-img:hover img { opacity: 0.88; }
+
+.cert-title {
+    display: block;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--ink-2);
+    margin-bottom: 0.25rem;
+}
+
+.cert-meta {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--ink-3);
+    font-variant-numeric: tabular-nums;
+}
+
+.cert-link {
+    display: inline-block;
+    margin-top: 0.375rem;
+    font-size: 0.75rem;
+}
+
+/* ---------- 12. คอนเทนต์ ---------- */
+.yt {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.5rem;
+}
+
+.yt-avatar {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--rule-2);
+}
+
+.yt-name { font-family: var(--serif); font-size: 1.0625rem; font-weight: 700; }
+.yt-sub { font-size: 0.875rem; color: var(--ink-3); margin: 0.125rem 0 0; }
+
+.yt-video {
+    display: block;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--paper-2);
+}
+.yt-video img { width: 100%; }
+.yt-video:hover { text-decoration: none; }
+
+.yt-caption {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--ink-2);
+}
+
+/* ---------- 13. ติดต่อ ---------- */
+.contact { border-top: 1px solid var(--rule-2); padding-top: 2.5rem; }
+
+.contact-note {
+    color: var(--ink-2);
+    font-size: 1.0625rem;
+    max-width: 30rem;
+    margin-bottom: 1.75rem;
+}
+
+.contact-mail {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 1.75rem;
+}
+
+.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 0.9375rem;
+    margin-bottom: 3rem;
+}
+.contact-links a { color: var(--ink-2); }
+.contact-links a:hover { color: var(--accent); }
+
+.colophon {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+}
+
+/* ---------- 14. Modal ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(26, 26, 23, 0.92);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    cursor: zoom-out;
+}
+.modal.is-open { display: flex; }
+
+.modal img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 4px;
+    background: var(--paper);
+    cursor: default;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: 0;
+    color: rgba(251, 250, 247, 0.75);
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 0;
+}
+.modal-close svg { width: 26px; height: 26px; }
+.modal-close:hover { color: var(--paper); }
+
+/* ---------- 15. จอเล็ก ---------- */
+/* กันเมนูมือถือค้างอยู่ ถ้าผู้ใช้เปิดเมนูแล้วขยายจอ (JS ปิดให้อยู่แล้ว แต่กันซ้ำ) */
+@media (min-width: 768px) {
+    .nav-mobile { display: none !important; }
+}
+
+@media (max-width: 767px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+
+    section { margin-bottom: 3.5rem; }
+
+    .post-minor { grid-template-columns: 1fr; gap: 1rem; }
+    .post-thumb { aspect-ratio: 16 / 9; }
+
+    .skill-row { grid-template-columns: 1fr; gap: 0.25rem; }
+
+    .yt { flex-direction: column; align-items: flex-start; gap: 0.875rem; }
+}
+
+/* ---------- 16. ลดการเคลื่อนไหว ---------- */
 @media (prefers-reduced-motion: reduce) {
-    .profile-glow {
-        animation: none;
-    }
-
-    /* ต้องมี !important เพราะ .scroll-smooth ของ Tailwind เป็น class
-       ซึ่ง specificity สูงกว่า element selector ธรรมดา */
-    html.scroll-smooth,
-    html {
-        scroll-behavior: auto !important;
-    }
-
-    *,
-    *::before,
-    *::after {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;

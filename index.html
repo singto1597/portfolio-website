@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="th" class="scroll-smooth">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>พัฒนพล สุธรรม | Full-Stack Developer — สร้างเว็บและระบบที่ใช้งานจริง</title>
-    <meta name="description" content="พอร์ตโฟลิโอของพัฒนพล สุธรรม นักเรียน ม.4 จังหวัดแพร่ ผู้พัฒนาเว็บและระบบที่ใช้งานจริงในโรงเรียน ด้วย Vue 3, TypeScript, FastAPI และ PostgreSQL">
+    <meta name="description" content="พอร์ตโฟลิโอของพัฒนพล สุธรรม นักเรียน ม.4 จังหวัดแพร่ ผู้พัฒนาเว็บและระบบที่ใช้งานจริงในโรงเรียน — SYNCROOM และ PIRIvoice">
     <meta name="author" content="Phatthanaphon Sutham">
-    <meta name="theme-color" content="#0B1120">
+    <meta name="theme-color" content="#FBFAF7">
     <link rel="canonical" href="https://www.singto1597.xyz/">
 
     <!-- Open Graph -->
@@ -31,209 +31,200 @@
     <link rel="icon" href="./images/favicon.png" sizes="any">
     <link rel="apple-touch-icon" href="./images/apple-touch-icon.png">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        // ทั้ง Inter และ Fira Code ไม่มีตัวอักษรไทย — Plex Sans Thai
-                        // ทำหน้าที่เป็น fallback ระดับ glyph ให้ทั้งสองตระกูล
-                        // (ไม่งั้นข้อความไทยที่ใช้ font-mono จะขึ้นเป็นกล่อง)
-                        sans: ['Inter', 'IBM Plex Sans Thai', 'sans-serif'],
-                        mono: ['Fira Code', 'IBM Plex Sans Thai', 'monospace'],
-                    },
-                    colors: {
-                        bgDark: '#0B1120',      // พื้นหลังเกือบดำ
-                        cardDark: '#1E293B',    // สีการ์ด (Slate-800)
-                        textMain: '#E2E8F0',    // สีตัวหนังสือหลัก
-                        textMuted: '#94A3B8',   // สีตัวหนังสือรอง
-                        accent: '#06B6D4',      // สีฟ้า Cyan (ใช้ตัดให้เด่น)
-                        accentHover: '#22D3EE'  // สีฟ้าตอนเอาเมาส์ชี้
-                    }
-                }
-            }
-        }
-    </script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
-    <!-- pin เวอร์ชันไว้: lucide ตัด brand icon (github, youtube) ออกในเวอร์ชันใหม่
-         ถ้าใช้ @latest ต่อไป ไอคอนจะหายเงียบ ๆ โดยไม่มี error -->
-    <script src="https://unpkg.com/lucide@1.47.0/dist/umd/lucide.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300;400;500;600;700&family=Noto+Serif+Thai:wght@600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
-
 </head>
-<body class="bg-bgDark relative overflow-x-hidden">
+<body>
 
-    <div class="fixed inset-0 bg-grid opacity-[0.15] pointer-events-none z-0"></div>
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="#home" class="nav-logo">สิงโต</a>
 
-    <nav class="fixed top-0 w-full z-50 bg-bgDark/80 backdrop-blur-lg border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
-            <a href="#home" class="font-mono text-xl font-bold tracking-tighter">
-                <span class="text-accent">&lt;</span>Dev<span class="text-white">.Me</span><span class="text-accent">/&gt;</span>
-            </a>
-
-            <div class="hidden md:flex items-center gap-6 text-sm font-medium text-textMuted">
-                <a href="#projects" class="hover:text-accent transition-colors duration-200">ผลงาน</a>
-                <a href="#stack" class="hover:text-accent transition-colors duration-200">ทักษะ</a>
-                <a href="#journey" class="hover:text-accent transition-colors duration-200">เกี่ยวกับผม</a>
-                <a href="#certificates" class="hover:text-accent transition-colors duration-200">เกียรติบัตร</a>
-                <a href="#youtube" class="hover:text-accent transition-colors duration-200">คอนเทนต์</a>
-                <a href="#contact" class="hover:text-accent transition-colors duration-200">ติดต่อ</a>
+            <div class="nav-links">
+                <a href="#projects">ผลงาน</a>
+                <a href="#stack">ทักษะ</a>
+                <a href="#ai">AI</a>
+                <a href="#journey">เกี่ยวกับ</a>
+                <a href="#certificates">เกียรติบัตร</a>
+                <a href="#youtube">คอนเทนต์</a>
+                <a href="#contact">ติดต่อ</a>
             </div>
 
-            <button id="nav-toggle" type="button"
-                    class="md:hidden p-2 -mr-2 text-textMuted hover:text-accent transition-colors"
+            <button id="nav-toggle" type="button" class="nav-toggle"
                     aria-label="เปิดเมนู" aria-expanded="false" aria-controls="mobile-menu">
-                <i data-lucide="menu" class="w-6 h-6" id="nav-icon-open"></i>
-                <i data-lucide="x" class="w-6 h-6 hidden" id="nav-icon-close"></i>
+                <svg id="nav-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+                    <path d="M3 6h18M3 12h18M3 18h18"/>
+                </svg>
+                <svg id="nav-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.75" stroke-linecap="round" aria-hidden="true" hidden>
+                    <path d="M18 6 6 18M6 6l12 12"/>
+                </svg>
             </button>
         </div>
     </nav>
 
     <!-- เมนูมือถือ -->
-    <div id="mobile-menu" class="hidden md:hidden fixed top-16 inset-x-0 z-40 bg-bgDark/95 backdrop-blur-lg border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-6 py-2 flex flex-col">
-            <a href="#projects" class="py-3 border-b border-slate-800/60 text-textMuted hover:text-accent transition-colors">ผลงาน</a>
-            <a href="#stack" class="py-3 border-b border-slate-800/60 text-textMuted hover:text-accent transition-colors">ทักษะ</a>
-            <a href="#journey" class="py-3 border-b border-slate-800/60 text-textMuted hover:text-accent transition-colors">เกี่ยวกับผม</a>
-            <a href="#certificates" class="py-3 border-b border-slate-800/60 text-textMuted hover:text-accent transition-colors">เกียรติบัตร</a>
-            <a href="#youtube" class="py-3 border-b border-slate-800/60 text-textMuted hover:text-accent transition-colors">คอนเทนต์</a>
-            <a href="#contact" class="py-3 text-textMuted hover:text-accent transition-colors">ติดต่อ</a>
+    <div id="mobile-menu" class="nav-mobile" hidden>
+        <div class="page">
+            <a href="#projects">ผลงาน</a>
+            <a href="#stack">ทักษะ</a>
+            <a href="#ai">ผมกับ AI</a>
+            <a href="#journey">เกี่ยวกับผม</a>
+            <a href="#certificates">เกียรติบัตร</a>
+            <a href="#youtube">คอนเทนต์</a>
+            <a href="#contact">ติดต่อ</a>
         </div>
     </div>
 
-    <!-- MAIN CONTAINER -->
-    <main class="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-20">
+    <main class="page">
 
-        <section id="home" class="min-h-[60vh] flex flex-col-reverse md:flex-row items-center gap-12 mb-32">
-            <div class="flex-1 text-center md:text-left space-y-6">
-                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/50 border border-slate-700 text-accent text-xs font-mono mb-2">
-                    <span class="w-2 h-2 rounded-full bg-accent animate-ping"></span>
-                    นักเรียน ม.4 · Full-Stack Developer
-                </div>
-
-                <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
-                    สร้างเว็บและระบบ<br>
-                    ที่<span class="text-accent">คนใช้งานจริง</span>
-                </h1>
-
-                <p class="text-lg text-textMuted max-w-xl mx-auto md:mx-0 leading-relaxed">
-                    สวัสดีครับ ผมชื่อ <span class="text-white font-semibold" id="my-name">...</span>
-                    <br>ผมออกแบบและพัฒนาระบบเว็บครบวงจร ตั้งแต่หน้าเว็บที่ผู้ใช้เห็น (Vue 3 + TypeScript)
-                    ไปจนถึง API (FastAPI), Database (PostgreSQL) และการ Deploy ขึ้น Server จริง
-                    — ระบบที่ผมทำมีคนใช้งานอยู่ในโรงเรียนทุกวัน
-                </p>
-
-                <div class="flex flex-wrap gap-4 justify-center md:justify-start pt-4">
-                    <a href="#projects" class="group px-6 py-3 bg-accent text-bgDark font-bold rounded-lg hover:bg-accentHover transition-all flex items-center gap-2">
-                        <i data-lucide="folder-code" class="w-5 h-5"></i>
-                        ดูผลงาน
-                    </a>
-                    <a href="https://www.pirivoice.com" target="_blank" rel="noopener"
-                       class="px-6 py-3 border border-slate-600 text-slate-300 font-medium rounded-lg hover:bg-slate-800 hover:border-slate-500 transition-all flex items-center gap-2">
-                        <i data-lucide="external-link" class="w-5 h-5"></i>
-                        เยี่ยมชมระบบจริง
-                    </a>
-                </div>
-            </div>
-
-            <div class="flex-1 flex justify-center relative">
-                <div class="absolute w-64 h-64 bg-accent rounded-full blur-[80px] opacity-20 -z-10"></div>
-                <img id="profile-img" src="" alt="" class="w-56 h-56 md:w-48 md:h-48 lg:w-72 lg:h-72 object-cover rounded-2xl border-2 border-slate-700 profile-glow">
-            </div>
-        </section>
-
-        <section id="projects" class="mb-32">
-            <div class="flex justify-between items-end gap-6 mb-10">
+        <!-- ---------- แนะนำตัว ---------- -->
+        <section id="home" class="intro">
+            <div class="intro-top">
+                <img id="profile-img" class="intro-photo" src="" alt="" width="88" height="88" decoding="async">
                 <div>
-                    <div class="flex items-center gap-3 mb-2">
-                        <i data-lucide="folder-code" class="text-accent w-6 h-6"></i>
-                        <h2 class="text-3xl font-bold text-white">ผลงาน</h2>
-                    </div>
-                    <p class="text-textMuted text-sm">Selected Work</p>
+                    <h1 class="intro-name" id="my-name">...</h1>
+                    <p class="intro-role">นักเรียน ม.4 สายไฟฟ้า · ทำเว็บและระบบที่คนใช้งานจริง</p>
                 </div>
-                <a href="https://github.com/singto1597" target="_blank" rel="noopener" class="hidden md:flex items-center gap-2 text-accent hover:text-accentHover text-sm font-medium transition shrink-0">
-                    GitHub <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
             </div>
 
-            <div id="projects-featured" class="grid grid-cols-1 gap-6 mb-16"></div>
-
-            <div class="flex items-center gap-3 mb-2">
-                <i data-lucide="history" class="text-accent w-5 h-5"></i>
-                <h3 class="text-xl font-bold text-white">โปรเจกต์ช่วงเริ่มต้น</h3>
+            <div class="intro-body">
+                <p>
+                    ผมชอบทำระบบที่คนอื่นได้ใช้จริง ระบบที่ผมทำมีคนในโรงเรียนเปิดใช้ทุกวัน
+                    ตั้งแต่ระบบเงินของห้อง ไปจนถึงระบบรับเรื่องร้องเรียนของสภานักเรียน
+                </p>
+                <p>
+                    ผมเรียนสายไฟฟ้า ไม่ได้เรียนคอมพิวเตอร์โดยตรง
+                    แต่คิดว่าโค้ดกับไฟฟ้าเอาไปต่อยอดร่วมกันได้กว้างกว่า เลยเลือกเรียนไฟฟ้าเป็นหลัก
+                    แล้วศึกษาการเขียนโปรแกรมด้วยตัวเองมาตลอด
+                </p>
             </div>
-            <p class="text-textMuted text-sm mb-6">Other Projects</p>
-            <div id="projects-other" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+            <div class="intro-links">
+                <a href="#projects">ดูผลงาน →</a>
+                <a href="https://www.pirivoice.com" target="_blank" rel="noopener">เยี่ยมชมระบบจริง ↗</a>
+            </div>
         </section>
 
-        <section id="stack" class="mb-32">
-            <div class="flex items-center gap-3 mb-2">
-                <i data-lucide="cpu" class="text-accent w-6 h-6"></i>
-                <h2 class="text-3xl font-bold text-white">ทักษะ</h2>
+        <!-- ---------- 01 ผลงาน ---------- -->
+        <section id="projects">
+            <div class="section-head">
+                <h2 class="section-title">ผลงาน</h2>
+                <span class="section-num">01</span>
             </div>
-            <p class="text-textMuted text-sm mb-10">Tech Stack</p>
 
-            <div id="stack-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"></div>
+            <div id="projects-feed" class="feed"></div>
         </section>
 
-        <section id="journey" class="mb-32">
-            <div class="flex items-center gap-3 mb-2">
-                <i data-lucide="compass" class="text-accent w-6 h-6"></i>
-                <h2 class="text-3xl font-bold text-white">เกี่ยวกับผม</h2>
+        <!-- ---------- 02 ทักษะ ---------- -->
+        <section id="stack">
+            <div class="section-head">
+                <h2 class="section-title">ทักษะ</h2>
+                <span class="section-num">02</span>
             </div>
-            <p class="text-textMuted text-sm mb-10">About Me</p>
 
-            <div id="journey-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            <div id="stack-container" class="skills"></div>
         </section>
 
-        <section id="certificates" class="mb-32">
-            <div class="flex items-center gap-3 mb-2">
-                <i data-lucide="award" class="text-accent w-6 h-6"></i>
-                <h2 class="text-3xl font-bold text-white">เกียรติบัตร</h2>
+        <!-- ---------- 03 ผมกับ AI ---------- -->
+        <section id="ai">
+            <div class="section-head">
+                <h2 class="section-title">ผมกับ AI</h2>
+                <span class="section-num">03</span>
             </div>
-            <p class="text-textMuted text-sm mb-10">Certificates</p>
 
-            <div id="certs-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div class="ai-note">
+                <p class="ai-lede">
+                    ระบบทุกตัวในหน้านี้ ไม่มีทางเกิดขึ้นได้เลยถ้าไม่ได้ใช้ AI
+                    — ตอนแรกผมต่อต้านมันนะ แต่เดี๋ยวนี้ใช้แทบจะทุกอย่าง
+                </p>
+                <p>
+                    ช่วงแรกผมใช้ AI ช่วยศึกษา คิด และวางแผนระบบ แล้วลองลงมือทำเอง เขียนเองบ้าง
+                    จนเริ่มรู้ว่าอะไรทำงานยังไง ขั้นตอนเป็นยังไง และอะไรเชื่อมกับอะไร
+                    พอเข้าใจแล้ว เวลาระบบพังหรืออยากเพิ่มฟีเจอร์ใหม่
+                    ผมก็รู้เองว่าต้องเปิดไฟล์ไหน และควรยกส่วนไหนให้ AI ช่วยต่อ — ได้ฝึกวิเคราะห์เยอะมาก
+                </p>
+                <p>
+                    หลังจากได้รู้จัก Claude Code ชีวิตเปลี่ยนไปเยอะ
+                    มันทำให้การเขียนโค้ดและการทำระบบง่ายขึ้นมาก
+                    ไอเดียที่อยากทำเสร็จได้ทันทีโดยไม่ต้องคอยก็อปไฟล์ไปมาระหว่างเครื่องมือ
+                    แค่สั่งให้ถูกต้อง สั่งแบบมีความรู้ แล้วคอยดูการทำงานของมันก็พอ
+                    ตอนนี้มันเข้าใจโปรเจกต์ผมเยอะขึ้นเรื่อย ๆ แก้ถูกจุดขึ้น ระวังมากขึ้น และตรงใจมากขึ้น
+                </p>
+            </div>
         </section>
 
-        <section id="youtube" class="mb-32">
-            <div class="flex items-center gap-3 mb-2">
-                <i data-lucide="monitor-play" class="text-accent w-6 h-6"></i>
-                <h2 class="text-3xl font-bold text-white">คอนเทนต์</h2>
+        <!-- ---------- 04 เกี่ยวกับผม ---------- -->
+        <section id="journey">
+            <div class="section-head">
+                <h2 class="section-title">เกี่ยวกับผม</h2>
+                <span class="section-num">04</span>
             </div>
-            <p class="text-textMuted text-sm mb-10">YouTube</p>
+
+            <div id="journey-container" class="journey"></div>
+        </section>
+
+        <!-- ---------- 05 เกียรติบัตร ---------- -->
+        <section id="certificates">
+            <div class="section-head">
+                <h2 class="section-title">เกียรติบัตร</h2>
+                <span class="section-num">05</span>
+            </div>
+
+            <div class="rail-wrap">
+                <div id="certs-container" class="rail"></div>
+            </div>
+        </section>
+
+        <!-- ---------- 06 คอนเทนต์ ---------- -->
+        <section id="youtube">
+            <div class="section-head">
+                <h2 class="section-title">คอนเทนต์</h2>
+                <span class="section-num">06</span>
+            </div>
 
             <div id="youtube-container"></div>
         </section>
 
-        <footer id="contact" class="border-t border-slate-800 pt-16 pb-8 text-center">
-            <h2 class="text-3xl font-bold text-white mb-6">ติดต่อ</h2>
-            <p class="text-textMuted mb-8 max-w-xl mx-auto leading-relaxed">
-                ถ้าอยากได้คนช่วยทำเว็บหรือวางระบบหลังบ้าน หรือแค่อยากคุยเรื่อง Tech สนุกๆ ทักมาได้เลยครับ
+        <!-- ---------- 07 ติดต่อ ---------- -->
+        <footer id="contact" class="contact">
+            <div class="section-head">
+                <h2 class="section-title">ติดต่อ</h2>
+                <span class="section-num">07</span>
+            </div>
+
+            <p class="contact-note">
+                อยากได้คนช่วยทำเว็บหรือวางระบบหลังบ้าน หรือแค่อยากคุยเรื่องเทคฯ สนุก ๆ
+                ทักมาได้เลยครับ
             </p>
 
-            <div id="socials-container" class="flex justify-center gap-6 mb-12"></div>
+            <a class="contact-mail" href="mailto:singto1597@gmail.com">singto1597@gmail.com</a>
 
-            <p class="text-slate-600 text-sm font-mono">
-                © <span id="year"></span> Phatthanaphon Sutham | Built with HTML, Tailwind &amp; Vanilla JS.
+            <div id="socials-container" class="contact-links"></div>
+
+            <p class="colophon">
+                © <span id="year"></span> พัฒนพล สุธรรม — เขียนด้วย HTML, CSS และ JavaScript ธรรมดา
+                ไม่มีเฟรมเวิร์ก ไม่มีตัวช่วยสร้างหน้าเว็บ
             </p>
         </footer>
 
     </main>
 
-    <div id="image-modal" class="fixed inset-0 z-[100] bg-black/90 hidden items-center justify-center p-4 backdrop-blur-sm cursor-zoom-out"
+    <div id="image-modal" class="modal"
          role="dialog" aria-modal="true" aria-label="ดูรูปขนาดใหญ่" onclick="closeImage()">
-        <button type="button" aria-label="ปิด"
-                class="absolute top-5 right-5 text-slate-400 hover:text-white transition transform hover:rotate-90">
-            <i data-lucide="x" class="w-10 h-10"></i>
+        <button type="button" class="modal-close" aria-label="ปิด">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+                <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
         </button>
 
-        <img id="modal-img" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border border-slate-700" onclick="event.stopPropagation()">
+        <!-- ไม่ใส่ src="" ตั้งแต่แรก — attribute ว่างทำให้เบราว์เซอร์ยิง request ไปที่ตัวหน้าเว็บเอง -->
+        <img id="modal-img" alt="" onclick="event.stopPropagation()">
     </div>
 
     <script src="script.js"></script>
