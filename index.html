@@ -85,7 +85,11 @@
         <!-- ---------- แนะนำตัว ---------- -->
         <section id="home" class="intro">
             <div class="intro-top">
-                <img id="profile-img" class="intro-photo" src="" alt="" width="88" height="88" decoding="async">
+                <!-- ปุ่มครอบรูปไว้ เพื่อให้กดแล้วเปิดรูปต้นฉบับได้ (ไฟล์ที่โชว์เป็นรูปย่อ) -->
+                <button type="button" class="intro-photo" id="profile-btn"
+                        aria-label="ดูรูปโปรไฟล์ขนาดเต็ม">
+                    <img id="profile-img" src="" alt="" width="256" height="309" decoding="async">
+                </button>
                 <div>
                     <h1 class="intro-name" id="my-name">...</h1>
                     <p class="intro-role">นักเรียน ม.4 สายไฟฟ้า · ทำเว็บและระบบที่คนใช้งานจริง</p>
@@ -98,7 +102,7 @@
                     ตั้งแต่ระบบเงินของห้อง ไปจนถึงระบบรับเรื่องร้องเรียนของสภานักเรียน
                 </p>
                 <p>
-                    ผมเรียนสายไฟฟ้า ไม่ได้เรียนคอมพิวเตอร์โดยตรง
+                    ผมอยากเรียนสายไฟฟ้า ไม่ได้เรียนคอมพิวเตอร์โดยตรง
                     แต่คิดว่าโค้ดกับไฟฟ้าเอาไปต่อยอดร่วมกันได้กว้างกว่า เลยเลือกเรียนไฟฟ้าเป็นหลัก
                     แล้วศึกษาการเขียนโปรแกรมด้วยตัวเองมาตลอด
                 </p>
@@ -204,11 +208,12 @@
 
             <a class="contact-mail" href="mailto:singto1597@gmail.com">singto1597@gmail.com</a>
 
+            <div id="social-featured"></div>
+
             <div id="socials-container" class="contact-links"></div>
 
             <p class="colophon">
-                © <span id="year"></span> พัฒนพล สุธรรม — เขียนด้วย HTML, CSS และ JavaScript ธรรมดา
-                ไม่มีเฟรมเวิร์ก ไม่มีตัวช่วยสร้างหน้าเว็บ
+                © <span id="year"></span> พัฒนพล สุธรรม — เขียนด้วย HTML, CSS และ JavaScript
             </p>
         </footer>
 

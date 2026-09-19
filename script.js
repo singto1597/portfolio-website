@@ -1,14 +1,19 @@
 const data = {
     profile: {
-        name: "พัฒนพล (สิงโต) สุธรรม",
-        avatar: "./images/profiles/profile.jpg"
+        name: "พัฒนพล สุธรรม (สิงโต)",
+
+        // ไฟล์ย่อสำหรับ avatar กลม — ต้นฉบับ profile.jpg ยังอยู่ครบ ไม่ถูกแก้
+        avatar: "./images/profiles/profile-avatar.jpg",
+        hero:   "./images/profiles/profile-hero.jpg",
+        full:   "./images/profiles/profile.jpg"     // ต้นฉบับ ใช้ตอนกดดูรูปใหญ่
     },
 
     stack: [
         { cat: "หน้าเว็บ",   items: ["Vue 3", "TypeScript", "Vite", "Tailwind CSS", "Pinia", "JavaScript", "HTML", "CSS"] },
         { cat: "หลังบ้าน",    items: ["FastAPI", "Python", "Flask", "PostgreSQL", "Redis", "SQL", "PHP"] },
         { cat: "เซิร์ฟเวอร์", items: ["Docker Swarm", "Traefik", "Nginx", "Linux", "Proxmox", "Git", "Cloudflare Tunnels"] },
-        { cat: "ฮาร์ดแวร์",   items: ["C/C++", "ESP32", "Arduino", "Raspberry Pi", "Electronics", "Networks"] }
+        { cat: "ฮาร์ดแวร์",   items: ["C/C++", "ESP32", "Arduino", "Raspberry Pi", "Electronics"] },
+        { cat: "เน็ตเวิร์ค",   items: ["Subnetting", "VLAN", "Trunking", "LACP", "STP/RSTP", "Static Route", "NAT", "Firewall", "DHCP", "DNS", "QoS", "PPPoE", "Hotspot", "WireGuard VPN", "Port Mirroring", "802.1X", "SNMP", "RouterOS", "Winbox", "Switch L2 Managed"] }
     ],
 
     journey: [
@@ -58,8 +63,8 @@ const data = {
             scale: "lead",
             story: [
                 "สภานักเรียนอยากรับฟังความคิดเห็นจากนักเรียนให้เป็นระบบ ไม่ใช่รับเรื่องแล้วหายไป ครูที่ปรึกษาสภาเลยติดต่อมาถามว่าทำให้ได้ไหม",
-                "โจทย์ที่ยากไม่ใช่การรับเรื่อง แต่คือการทำให้เรื่องหนึ่ง ๆ ถูกส่งต่อไปถึงคนที่แก้ได้จริง และมีร่องรอยว่าตอนนี้อยู่ขั้นไหนแล้ว ผมออกแบบให้เรื่องไต่จากหัวหน้าห้อง ขึ้นไปประธานระดับ แล้วไปถึงสภานักเรียน พร้อมตัวนับเวลาว่าขั้นไหนต้องตอบภายในกี่วัน ถ้าเงียบเกินกำหนด ระบบจะดันขึ้นขั้นถัดไปให้เอง",
-                "ตอนนี้มันเปิดใช้งานจริงอยู่ที่ pirivoice.com และมีนักเรียนใช้แจ้งเรื่องเข้ามาเรื่อย ๆ"
+                "โจทย์ที่ยากไม่ใช่การรับเรื่อง แต่คือการทำให้เรื่องหนึ่ง ๆ ถูกส่งต่อไปถึงคนที่แก้ได้จริง และมีร่องรอยว่าตอนนี้อยู่ขั้นไหนแล้ว ผมออกแบบให้เรื่องไต่จากหัวหน้าห้อง ขึ้นไปประธานระดับ แล้วไปถึงสภานักเรียน พร้อมตัวนับเวลาว่าขั้นไหนต้องตอบภายในกี่วัน ถ้าเรื่องนั้นเกินความสามารถของผู้รับผิดชอบ ก็ถูกส่งต่อขึ้นไปที่ระดับถัดไป",
+                "ตอนนี้มันเปิดใช้งานจริงอยู่ที่ pirivoice.com และมีนักเรียนใช้แจ้งเรื่องเข้ามาเรื่อย ๆ เลยครับ"
             ],
             live: "https://www.pirivoice.com",
             github: "https://github.com/singto1597/prsc_portal",
@@ -76,7 +81,7 @@ const data = {
             status: "archived",
             scale: "minor",
             story: [
-                "ผมเขียนโค้ดควบคุมและประกอบตัวหุ่นเอง ลงแข่ง 3 ประเภท — หุ่นวิ่งเร็ว หุ่นไต่ระดับ และ Maejo Phrae Robot Challenge เป็นโปรเจกต์แรก ๆ ที่ได้จับฮาร์ดแวร์จริง และได้เห็นว่าโค้ดที่เขียนไปขยับของจริงได้"
+                "ผมเขียนโค้ดควบคุมและประกอบตัวหุ่นเอง ลงแข่ง 3 ประเภท — หุ่นวิ่งเร็ว หุ่นระดับสูง และ หุ่นบังคับกึ่งอัตโนมัติ เป็นงานแข่งที่ได้จับฮาร์ดแวร์จริง จึงได้เห็นว่าโค้ดที่เขียนไปขยับของจริงได้ ได้ฝึกการเรียนรู้ และมีการแก้ปัญหาเฉพาะหน้าด้วยครับ"
             ],
             live: null,
             github: "https://github.com/singto1597/piriyalai-robot",
@@ -91,7 +96,7 @@ const data = {
             status: "archived",
             scale: "minor",
             story: [
-                "โครงงาน STEM ตอน ม.3 — ทำระบบเลี้ยงกุ้งฝอยอัตโนมัติ ให้อาหารตามเวลาและวัดค่าสภาพน้ำผ่านหน้าเว็บ เป็นครั้งแรกที่ได้ต่อเซนเซอร์จริง แล้วเห็นข้อมูลไหลเข้ามาสด ๆ"
+                "โครงงาน STEM ตอน ม.3 — ทำระบบเลี้ยงกุ้งฝอยอัตโนมัติ ให้อาหารตามเวลาและวัดค่าสภาพน้ำผ่านหน้าเว็บ เป็นโครงงานส่งคุณครู ซึ่งใช้ ESP32 เป็นตัวควบคุม และเก็บข้อมูลลง Google Sheets"
             ],
             live: null,
             github: "https://github.com/singto1597/Shrimp-farming-system_IOT",
@@ -224,7 +229,7 @@ const data = {
         channelName: "พัฒนพล สุธรรม",
         subscribers: "562+",
         desc: "แชร์ความรู้เรื่องการเขียนโปรแกรมและเรื่องอุปกรณ์ไฟฟ้าต่าง ๆ",
-        avatar: "./images/profiles/profile.jpg",
+        avatar: "./images/profiles/profile-avatar.jpg",
         channelUrl: "https://www.youtube.com/@PhatthanaphonSutham",
         featuredVideo: {
             title: "อัปเกรด CPU โน้ตบุ๊กเก่า 11 ปี!! ด้วยเงินแค่ 400 บาท! ตัดต่อลื่นเฉย!!",
@@ -234,9 +239,11 @@ const data = {
     },
 
     socials: [
-        { name: "GitHub",    url: "https://github.com/singto1597/", external: true },
-        { name: "Instagram", url: "https://www.instagram.com/xphat.z/", external: true },
-        { name: "อีเมล",      url: "mailto:singto1597@gmail.com", external: false }
+        // featured: true = ยกขึ้นมาแสดงเดี่ยว ๆ ไม่ไปจมอยู่ในแถวลิงก์ธรรมดา
+        { name: "Instagram", handle: "@xphat.z", url: "https://www.instagram.com/xphat.z/",
+          external: true, featured: true },
+        { name: "GitHub", url: "https://github.com/singto1597/", external: true },
+        { name: "อีเมล",   url: "mailto:singto1597@gmail.com", external: false }
     ]
 };
 
@@ -262,9 +269,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderProfile() {
     document.getElementById('my-name').innerText = data.profile.name;
+
     const img = document.getElementById('profile-img');
-    img.src = data.profile.avatar;
+    img.src = data.profile.hero;          // รูปย่อสำหรับแสดง
     img.alt = data.profile.name;
+
+    // กดที่รูปแล้วเปิด "ต้นฉบับ" เสมอ ไม่ใช่รูปย่อ
+    const btn = document.getElementById('profile-btn');
+    if (btn) btn.onclick = () => openImage(data.profile.full);
 }
 
 /* ---------- ผลงาน: ฟีดแบบโพสต์ ---------- */
@@ -424,6 +436,8 @@ function renderCertificates() {
     `).join('');
 }
 
+// การ์ดช่อง YouTube — ใช้สัญญาณที่คนจำได้ทันที (โลโก้แดง + ปุ่มเล่นบนภาพย่อ)
+// แทนที่จะอธิบายด้วยตัวหนังสือว่ามันคืออะไร
 function renderYoutube() {
     const container = document.getElementById('youtube-container');
     if (!container) return;
@@ -432,29 +446,65 @@ function renderYoutube() {
     const id = yt.featuredVideo.videoId;
 
     container.innerHTML = `
-        <div class="yt">
-            <img class="yt-avatar" src="${yt.avatar}" alt="${yt.channelName}" loading="lazy" decoding="async">
-            <div>
+        <div class="yt-brand">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                <path d="M23 12s0-3.9-.5-5.8a3 3 0 0 0-2.1-2.1C18.5 3.6 12 3.6 12 3.6s-6.5 0-8.4.5A3 3 0 0 0 1.5 6.2C1 8.1 1 12 1 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 8.4.5 8.4.5s6.5 0 8.4-.5a3 3 0 0 0 2.1-2.1C23 15.9 23 12 23 12ZM9.9 15.6V8.4l5.6 3.6-5.6 3.6Z"/>
+            </svg>
+            <span>YouTube</span>
+        </div>
+
+        <div class="yt-head">
+            <img class="yt-avatar" src="${yt.avatar}" alt="" loading="lazy" decoding="async">
+            <div class="yt-id">
                 <p class="yt-name">${yt.channelName}</p>
                 <p class="yt-sub">${yt.subscribers} ผู้ติดตาม · ${yt.desc}</p>
             </div>
+            <a class="yt-sub-btn" href="${yt.channelUrl}" target="_blank" rel="noopener">ดูช่อง</a>
         </div>
 
-        <a class="yt-video" href="${yt.featuredVideo.url}" target="_blank" rel="noopener">
+        <a class="yt-video" href="${yt.featuredVideo.url}" target="_blank" rel="noopener"
+           aria-label="ดูคลิป: ${yt.featuredVideo.title}">
             <img src="https://img.youtube.com/vi/${id}/maxresdefault.jpg"
-                 alt="${yt.featuredVideo.title}" loading="lazy" decoding="async"
+                 alt="" loading="lazy" decoding="async"
                  onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${id}/hqdefault.jpg'">
+            <span class="yt-play" aria-hidden="true">
+                <svg viewBox="0 0 68 48"><path d="M66.5 7.7a8.6 8.6 0 0 0-6-6C55.2 0 34 0 34 0S12.8 0 7.5 1.7a8.6 8.6 0 0 0-6 6C0 13 0 24 0 24s0 11 1.5 16.3a8.6 8.6 0 0 0 6 6C12.8 48 34 48 34 48s21.2 0 26.5-1.7a8.6 8.6 0 0 0 6-6C68 35 68 24 68 24s0-11-1.5-16.3Z" fill="#f00"/><path d="M27 34.5 45 24 27 13.5v21Z" fill="#fff"/></svg>
+            </span>
         </a>
 
-        <p class="yt-caption">
-            <a href="${yt.featuredVideo.url}" target="_blank" rel="noopener">${yt.featuredVideo.title}</a>
-             · <a href="${yt.channelUrl}" target="_blank" rel="noopener">ดูช่องทั้งหมด ↗</a>
-        </p>
+        <div class="yt-foot">
+            <p class="yt-title">${yt.featuredVideo.title}</p>
+            <a class="yt-more" href="${yt.channelUrl}" target="_blank" rel="noopener">ดูคลิปทั้งหมด ↗</a>
+        </div>
     `;
 }
 
 function renderSocials() {
-    document.getElementById('socials-container').innerHTML = data.socials.map(s => `
+    const featured = data.socials.find(s => s.featured);
+    const rest = data.socials.filter(s => !s.featured);
+
+    const slot = document.getElementById('social-featured');
+    if (slot && featured) {
+        slot.innerHTML = `
+            <a class="soc-feature" href="${featured.url}"
+               ${featured.external ? 'target="_blank" rel="noopener"' : ''}>
+                <span class="soc-ring" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9">
+                        <rect x="3" y="3" width="18" height="18" rx="5.2"/>
+                        <circle cx="12" cy="12" r="4"/>
+                        <circle cx="17.4" cy="6.6" r="1.05" fill="currentColor" stroke="none"/>
+                    </svg>
+                </span>
+                <span class="soc-text">
+                    <span class="soc-handle">${featured.handle}</span>
+                    <span class="soc-label">${featured.name}</span>
+                </span>
+                <span class="soc-go" aria-hidden="true">↗</span>
+            </a>
+        `;
+    }
+
+    document.getElementById('socials-container').innerHTML = rest.map(s => `
         <a href="${s.url}" ${s.external ? 'target="_blank" rel="noopener"' : ''}>${s.name}${s.external ? ' ↗' : ''}</a>
     `).join('');
 }
