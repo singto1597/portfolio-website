@@ -1,38 +1,41 @@
 /* ============================================================
    พัฒนพล สุธรรม — portfolio
-   ธีม: กระดาษกับหมึก
-   หลักการ: ใช้ "ตัวอักษร" สร้างลำดับชั้น ไม่ใช่สีหรือกรอบ
+   ธีม: หมึกกับแสงตะเกียง (ดำอุ่น + ทอง)
+   หลักการ: เนื้อหาเป็นการ์ดลอยบนพื้นเข้ม แบบเดียวกับฟีดโซเชียล
             สีเน้นปรากฏได้เฉพาะกับสิ่งที่กดได้เท่านั้น
    ============================================================ */
 
 /* ---------- 1. Tokens ---------- */
 :root {
-    /* กระดาษอุ่น ไม่ขาวจัด — ขาวจัดจะล้าตาเวลาอ่านนาน */
-    --paper:   #FBFAF7;
-    --paper-2: #F4F2EC;
+    /* ดำอุ่น ไม่ใช่ดำน้ำเงิน — ให้ความรู้สึกเป็น "หมึก" มากกว่า "จอคอม"
+       (ดำน้ำเงินคู่กับฟ้า neon คือชุดสีที่พอร์ตสาย dev ใช้กันจนเป็นสูตรสำเร็จ) */
+    --paper: #141310;   /* พื้นหลังหน้า */
+    --card:  #1F1C17;   /* พื้นการ์ด — ลอยขึ้นมาจากพื้นหลังแบบโพสต์โซเชียล */
 
-    /* หมึก: ดำอุ่น ไม่ดำสนิท */
-    --ink:   #1A1A17;
-    --ink-2: #4A4A43;   /* เนื้อความรอง — คอนทราสต์ 8.5:1 */
-    --ink-3: #6E6E64;   /* meta เล็ก ๆ   — คอนทราสต์ 4.9:1 (ผ่าน AA) */
+    /* ขาวอุ่น ไม่ขาวสนิท — ขาวสนิทบนพื้นดำจะฟุ้ง และกลบสระบน-ล่างของไทย
+       (คอนทราสต์คิดกับ --card ซึ่งเป็นพื้นจริงที่ตัวอักษรวางอยู่) */
+    --ink:   #F2EFE7;   /* 14.8:1 */
+    --ink-2: #A8A398;   /*  6.8:1 */
+    --ink-3: #8A857D;   /*  4.6:1 (ผ่าน AA ที่ขนาดเล็กสุด) */
 
-    --rule:   #E2DFD6;
-    --rule-2: #CFCBBE;
+    --rule:   #322E27;  /* เส้นคั่นในการ์ด */
+    --rule-2: #443F35;  /* เส้นคั่นที่ต้องเห็นชัดกว่า */
 
-    /* สีเน้น — ใช้กับ "สิ่งที่กดได้" เท่านั้น ห้ามใช้ประดับ */
-    --accent:     #1E40AF;
-    --accent-dim: #1E3A8A;
+    /* สีเน้น — ใช้กับ "สิ่งที่กดได้" เท่านั้น ห้ามใช้ประดับ
+       ทองอุ่นคือแสงตะเกียงบนพื้นหมึก ไม่ใช่ฟ้า neon */
+    --accent: #D8A657;  /* 7.7:1 */
 
-    --live: #15803D;
-    --wip:  #B45309;
-    --old:  #6E6E64;
+    --live: #6BBF8A;
+    --wip:  #D98E4A;
+    --old:  #8A857D;
 
-    --serif: 'Noto Serif Thai', 'IBM Plex Sans Thai', Georgia, serif;
-    --sans:  'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* ฟอนต์เดียวทั้งหน้า — ลำดับชั้นมาจากขนาดกับน้ำหนัก ไม่ใช่ชนิดตัวอักษร */
+    --sans: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
 
     --col: 43rem;        /* ความกว้างคอลัมน์อ่าน (~688px) */
     --gutter: 1.25rem;
     --nav-h: 3.75rem;
+    --pad: 1.125rem;     /* ระยะขอบในการ์ด ใช้ซ้ำหลายที่ */
 
     --ease: cubic-bezier(.2, .7, .3, 1);
 }
@@ -64,12 +67,14 @@ img { display: block; max-width: 100%; height: auto; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
+/* ฟอนต์เดียวทั้งหน้า ลำดับชั้นจึงมาจากน้ำหนัก + ขนาด + ระยะตัวอักษร
+   ตัวใหญ่ใช้ 700 และรัดตัวอักษรเข้าเล็กน้อย ให้ต่างจากเนื้อความโดยไม่ต้องเปลี่ยนฟอนต์ */
 h1, h2, h3 {
-    font-family: var(--serif);
+    font-family: var(--sans);
     font-weight: 700;
     line-height: 1.35;
     margin: 0;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
 }
 
 p { margin: 0 0 1.1em; }
@@ -102,7 +107,7 @@ section { margin-bottom: 4.5rem; }
     top: 0;
     z-index: 50;
     height: var(--nav-h);
-    background: rgba(251, 250, 247, 0.88);
+    background: rgba(20, 19, 16, 0.88);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--rule);
@@ -120,7 +125,6 @@ section { margin-bottom: 4.5rem; }
 }
 
 .nav-logo {
-    font-family: var(--serif);
     font-weight: 700;
     font-size: 1.0625rem;
     color: var(--ink);
@@ -178,7 +182,7 @@ section { margin-bottom: 4.5rem; }
     gap: 1rem;
     padding-bottom: 0.75rem;
     border-bottom: 1px solid var(--rule-2);
-    margin-bottom: 2.25rem;
+    margin-bottom: 1.25rem;
 }
 
 .section-title { font-size: 1.375rem; }
@@ -191,7 +195,7 @@ section { margin-bottom: 4.5rem; }
     flex-shrink: 0;
 }
 
-/* ---------- 6. Intro ---------- */
+/* ---------- 6. แนะนำตัว ---------- */
 .intro { padding-top: 3.5rem; }
 
 .intro-top {
@@ -233,43 +237,57 @@ section { margin-bottom: 4.5rem; }
     font-size: 0.9375rem;
 }
 
-/* ---------- 7. Feed / โพสต์ ---------- */
-.feed { display: flex; flex-direction: column; }
+/* ---------- 7. ฟีดผลงาน ---------- */
+.feed { display: flex; flex-direction: column; gap: 0.875rem; }
 
 .post {
-    padding: 2.25rem 0;
-    border-bottom: 1px solid var(--rule);
-}
-.post:first-child { padding-top: 0; }
-.post:last-child { border-bottom: 0; padding-bottom: 0; }
-
-.post-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 0.25rem;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: var(--pad) var(--pad) 0;
 }
 
-.post-name { font-size: 1.5rem; }
-
-.post-year {
-    font-size: 0.8125rem;
-    color: var(--ink-3);
-    font-variant-numeric: tabular-nums;
-    flex-shrink: 0;
-}
-
-.post-sub {
+/* หัวโพสต์: รูปผู้เขียน + ชื่อ + บรรทัดกำกับ — โครงเดียวกับโพสต์โซเชียล */
+.post-who {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem 0.625rem;
-    margin: 0 0 1.125rem;
+    gap: 0.625rem;
+    margin-bottom: 0.875rem;
+}
+
+.post-avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--rule);
+}
+
+.post-who-name {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.post-who-meta {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+    line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+.post-name { font-size: 1.3125rem; margin-bottom: 0.125rem; }
+
+.post-sub {
+    margin: 0 0 1rem;
     color: var(--ink-2);
     font-size: 0.9375rem;
 }
 
+/* จุดสถานะ — สีบอกความหมาย ตัวอักษรยังเป็นสีจางเพื่อไม่ให้แย่งความสนใจ */
 .status {
     display: inline-flex;
     align-items: center;
@@ -292,31 +310,36 @@ section { margin-bottom: 4.5rem; }
 .post-story {
     font-size: 1.0625rem;
     color: var(--ink-2);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
 }
 .post-story strong { color: var(--ink); font-weight: 600; }
 
+/* รูปเต็มขอบการ์ด เหมือนรูปในโพสต์ */
 .post-media {
     display: block;
-    margin-bottom: 1.25rem;
-    border: 1px solid var(--rule);
-    border-radius: 6px;
-    overflow: hidden;
-    background: var(--paper-2);
+    margin: 0 calc(var(--pad) * -1) 0;
+    border-top: 1px solid var(--rule);
+    background: var(--paper);
 }
+/* จำกัดความสูงรูปไว้ — ภาพหน้าจอระบบเป็นแนวตั้ง ถ้าปล่อยเต็มจะกินจอจนต้องเลื่อนข้าม
+   ครอปจากด้านบนเพราะส่วนหัวของหน้าจอคือส่วนที่บอกว่าระบบนี้ทำอะไร */
 .post-media img {
     width: 100%;
+    max-height: 26rem;
+    object-fit: cover;
+    object-position: top;
     transition: opacity 0.3s var(--ease);
 }
 .post-media:hover img { opacity: 0.9; }
 
-/* แถวปุ่ม — hairline ด้านบน เหมือนแถว Like/Comment ของโพสต์ */
+/* แถวลิงก์ท้ายโพสต์ — เส้นคั่นเต็มขอบ + ปุ่มคนละระดับ */
 .post-actions {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 1.5rem;
-    padding-top: 1rem;
+    margin: 0 calc(var(--pad) * -1);
+    padding: 0.75rem var(--pad);
     border-top: 1px solid var(--rule);
     font-size: 0.9375rem;
 }
@@ -325,8 +348,8 @@ section { margin-bottom: 4.5rem; }
 .post-actions .quiet { color: var(--ink-3); }
 .post-actions .quiet:hover { color: var(--accent); }
 
-/* โพสต์ย่อ — รูปเล็กด้านซ้าย */
-.post-minor { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.375rem; }
+/* โพสต์ช่วงเริ่มต้น — เล็กลง ใช้รูปย่อมุมซ้าย ไม่มีหัวผู้เขียนให้เปลืองที่ */
+.post-minor { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1.125rem; }
 
 /* โปรเจกต์ที่ไม่มีรูป — ปล่อยให้ข้อความกว้างเต็ม ไม่เหลือช่องว่างซ้าย */
 .post-minor.no-thumb { grid-template-columns: 1fr; }
@@ -335,20 +358,21 @@ section { margin-bottom: 4.5rem; }
 
 .post-minor .post-story {
     font-size: 0.9375rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.875rem;
 }
 
 .post-minor .post-actions {
     border-top: 0;
     padding-top: 0;
+    padding-bottom: 0;
     font-size: 0.875rem;
 }
 
 .post-thumb {
     border: 1px solid var(--rule);
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
-    background: var(--paper-2);
+    background: var(--paper);
     aspect-ratio: 4 / 3;
 }
 .post-thumb img { width: 100%; height: 100%; object-fit: cover; }
@@ -359,6 +383,7 @@ section { margin-bottom: 4.5rem; }
     align-items: center;
     gap: 0.875rem;
     margin: 0.5rem 0 0;
+    padding: 0 0.25rem;
     font-size: 0.8125rem;
     color: var(--ink-3);
 }
@@ -370,7 +395,12 @@ section { margin-bottom: 4.5rem; }
 }
 
 /* ---------- 8. ทักษะ ---------- */
-.skills { display: flex; flex-direction: column; gap: 0; }
+.skills {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 0.375rem var(--pad);
+}
 
 .skill-row {
     display: grid;
@@ -387,44 +417,51 @@ section { margin-bottom: 4.5rem; }
 
 /* ---------- 9. ผมกับ AI ---------- */
 .ai-note {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: var(--pad);
     font-size: 1.0625rem;
     color: var(--ink-2);
 }
 .ai-note p + p { margin-top: 1.1em; }
 
 .ai-lede {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    line-height: 1.6;
+    font-size: 1.1875rem;
+    font-weight: 600;
+    line-height: 1.65;
     color: var(--ink);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
 }
 
 /* ---------- 10. เกี่ยวกับผม ---------- */
-.journey { display: flex; flex-direction: column; }
-
-.journey-item {
-    padding: 1.75rem 0;
-    border-bottom: 1px solid var(--rule);
-}
-.journey-item:first-child { padding-top: 0; }
-.journey-item:last-child { border-bottom: 0; padding-bottom: 0; }
-
-.journey-q {
-    font-family: var(--serif);
-    font-size: 1.0625rem;
-    margin-bottom: 0.625rem;
+.journey {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 0.375rem var(--pad);
 }
 
-.journey-a {
-    color: var(--ink-2);
-    font-size: 0.9375rem;
-}
+.journey-item { padding: 1.5rem 0; border-bottom: 1px solid var(--rule); }
+.journey-item:first-child { padding-top: 0.875rem; }
+.journey-item:last-child { border-bottom: 0; padding-bottom: 0.875rem; }
+
+.journey-q { font-size: 1.0625rem; font-weight: 600; margin-bottom: 0.5rem; }
+
+.journey-a { color: var(--ink-2); font-size: 0.9375rem; }
 .journey-a b, .journey-a strong { color: var(--ink); font-weight: 600; }
 .journey-a .hl { color: var(--ink); font-weight: 600; }
 
 /* ---------- 11. เกียรติบัตร — แถวเลื่อนแนวนอน ---------- */
-.rail-wrap { position: relative; }
+.rail-wrap {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: var(--pad) 0 var(--pad) var(--pad);
+    overflow: hidden;
+}
 
 /* เงาที่ขอบขวา — สัญญาณว่าปัดดูต่อได้ */
 .rail-wrap::after {
@@ -435,7 +472,7 @@ section { margin-bottom: 4.5rem; }
     bottom: 0;
     width: 3rem;
     pointer-events: none;
-    background: linear-gradient(to right, transparent, var(--paper));
+    background: linear-gradient(to right, transparent, var(--card));
 }
 
 .rail {
@@ -443,7 +480,7 @@ section { margin-bottom: 4.5rem; }
     gap: 0.875rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    padding-bottom: 0.75rem;
+    padding: 0.25rem 0 0.75rem;
     scrollbar-width: thin;
     scrollbar-color: var(--rule-2) transparent;
 }
@@ -453,19 +490,16 @@ section { margin-bottom: 4.5rem; }
 
 /* การ์ดเกียรติบัตร — ตัวการ์ดเป็น div เพราะในการ์ดมีทั้งปุ่ม (เปิดรูปใหญ่)
    และลิงก์ออกไปข้างนอก ซึ่งซ้อนกันใน <button> เดียวไม่ได้ */
-.cert {
-    flex: 0 0 12.5rem;
-    scroll-snap-align: start;
-}
+.cert { flex: 0 0 12.5rem; scroll-snap-align: start; }
 
 .cert-img {
     display: block;
     width: 100%;
     padding: 0;
     border: 1px solid var(--rule);
-    border-radius: 6px;
+    border-radius: 8px;
     overflow: hidden;
-    background: var(--paper-2);
+    background: var(--paper);
     aspect-ratio: 4 / 3;
     margin-bottom: 0.625rem;
     cursor: zoom-in;
@@ -476,7 +510,7 @@ section { margin-bottom: 4.5rem; }
     object-fit: cover;
     transition: opacity 0.3s var(--ease);
 }
-.cert-img:hover img { opacity: 0.88; }
+.cert-img:hover img { opacity: 0.85; }
 
 .cert-title {
     display: block;
@@ -493,66 +527,70 @@ section { margin-bottom: 4.5rem; }
     font-variant-numeric: tabular-nums;
 }
 
-.cert-link {
-    display: inline-block;
-    margin-top: 0.375rem;
-    font-size: 0.75rem;
-}
+.cert-link { display: inline-block; margin-top: 0.375rem; font-size: 0.75rem; }
 
 /* ---------- 12. คอนเทนต์ ---------- */
+#youtube-container {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
 .yt {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
-    padding-bottom: 1.5rem;
+    gap: 1rem;
+    padding: var(--pad) var(--pad) 1.125rem;
     border-bottom: 1px solid var(--rule);
-    margin-bottom: 1.5rem;
 }
 
 .yt-avatar {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 3rem;
+    height: 3rem;
     border-radius: 50%;
     object-fit: cover;
     flex-shrink: 0;
-    border: 1px solid var(--rule-2);
+    border: 1px solid var(--rule);
 }
 
-.yt-name { font-family: var(--serif); font-size: 1.0625rem; font-weight: 700; }
+.yt-name { font-size: 1rem; font-weight: 600; }
 .yt-sub { font-size: 0.875rem; color: var(--ink-3); margin: 0.125rem 0 0; }
 
 .yt-video {
     display: block;
-    border: 1px solid var(--rule);
-    border-radius: 6px;
-    overflow: hidden;
-    background: var(--paper-2);
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
 }
 .yt-video img { width: 100%; }
 .yt-video:hover { text-decoration: none; }
 
 .yt-caption {
-    margin-top: 0.75rem;
+    padding: 0.875rem var(--pad);
     font-size: 0.875rem;
     color: var(--ink-2);
 }
 
 /* ---------- 13. ติดต่อ ---------- */
-.contact { border-top: 1px solid var(--rule-2); padding-top: 2.5rem; }
+.contact {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: var(--pad);
+}
 
 .contact-note {
     color: var(--ink-2);
     font-size: 1.0625rem;
     max-width: 30rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
 }
 
 .contact-mail {
-    font-family: var(--serif);
-    font-size: 1.25rem;
-    font-weight: 700;
     display: inline-block;
-    margin-bottom: 1.75rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
 }
 
 .contact-links {
@@ -560,17 +598,14 @@ section { margin-bottom: 4.5rem; }
     flex-wrap: wrap;
     gap: 1.5rem;
     font-size: 0.9375rem;
-    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.25rem;
 }
 .contact-links a { color: var(--ink-2); }
 .contact-links a:hover { color: var(--accent); }
 
-.colophon {
-    font-size: 0.8125rem;
-    color: var(--ink-3);
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--rule);
-}
+.colophon { font-size: 0.8125rem; color: var(--ink-3); }
 
 /* ---------- 14. Modal ---------- */
 .modal {
@@ -581,7 +616,7 @@ section { margin-bottom: 4.5rem; }
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    background: rgba(26, 26, 23, 0.92);
+    background: rgba(8, 8, 6, 0.94);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     cursor: zoom-out;
@@ -592,8 +627,8 @@ section { margin-bottom: 4.5rem; }
     max-width: 100%;
     max-height: 90vh;
     object-fit: contain;
-    border-radius: 4px;
-    background: var(--paper);
+    border-radius: 6px;
+    background: var(--card);
     cursor: default;
 }
 
@@ -603,13 +638,13 @@ section { margin-bottom: 4.5rem; }
     right: 1rem;
     background: none;
     border: 0;
-    color: rgba(251, 250, 247, 0.75);
+    color: rgba(242, 239, 231, 0.7);
     cursor: pointer;
     padding: 0.5rem;
     line-height: 0;
 }
 .modal-close svg { width: 26px; height: 26px; }
-.modal-close:hover { color: var(--paper); }
+.modal-close:hover { color: var(--ink); }
 
 /* ---------- 15. จอเล็ก ---------- */
 /* กันเมนูมือถือค้างอยู่ ถ้าผู้ใช้เปิดเมนูแล้วขยายจอ (JS ปิดให้อยู่แล้ว แต่กันซ้ำ) */
@@ -628,7 +663,7 @@ section { margin-bottom: 4.5rem; }
 
     .skill-row { grid-template-columns: 1fr; gap: 0.25rem; }
 
-    .yt { flex-direction: column; align-items: flex-start; gap: 0.875rem; }
+    .yt { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
 }
 
 /* ---------- 16. ลดการเคลื่อนไหว ---------- */

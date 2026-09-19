@@ -284,16 +284,28 @@ function storyHtml(story) {
     return (Array.isArray(story) ? story : [story]).map(p => `<p>${p}</p>`).join('');
 }
 
-// โพสต์เต็ม — เรื่องเล่า + รูปใหญ่ + แถวลิงก์
+// หัวโพสต์ — รูปเรา + ชื่อเรา + บรรทัดกำกับ (เวลา/สถานะ) โครงเดียวกับโพสต์โซเชียล
+function whoHtml(meta) {
+    return `
+        <div class="post-who">
+            <img class="post-avatar" src="${data.profile.avatar}" alt="" loading="lazy" decoding="async">
+            <div>
+                <div class="post-who-name">${data.profile.name}</div>
+                <div class="post-who-meta">${meta}</div>
+            </div>
+        </div>
+    `;
+}
+
+// โพสต์เต็ม — หัวโพสต์ + เรื่องเล่า + รูปใหญ่ + แถวลิงก์
 function leadPost(p) {
     const status = STATUS_META[p.status];
 
     return `
         <article class="post">
-            <div class="post-head">
-                <h3 class="post-name">${p.name}</h3>
-                <span class="post-year">${p.year}</span>
-            </div>
+            ${whoHtml(`<span>${p.year}</span>`)}
+
+            <h3 class="post-name">${p.name}</h3>
 
             <p class="post-sub">
                 <span>${p.subtitle}</span>
